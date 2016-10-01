@@ -30,7 +30,8 @@
     </Service>
     <Service Name="Microservice">
       <StatefulService ServiceTypeName="MicroserviceType" TargetReplicaSetSize="[Microservice_TargetReplicaSetSize]" MinReplicaSetSize="[Microservice_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[Microservice_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <!--UniformInt64Partition PartitionCount="[Microservice_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" /-->
+        <SingletonPartition />
       </StatefulService>
     </Service>
   </DefaultServices>

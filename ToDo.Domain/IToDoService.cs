@@ -9,6 +9,6 @@ namespace ToDo.Domain
 {
     public interface IToDoService : IService
     {
-        string GetHelloWorld();
+        Task<string> GetHelloWorld();
     }
 }

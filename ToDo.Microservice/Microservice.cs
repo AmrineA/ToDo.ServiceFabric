@@ -8,6 +8,7 @@ using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using ToDo.Domain;
+using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 
 namespace ToDo.Microservice
 {
@@ -29,12 +30,13 @@ namespace ToDo.Microservice
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            return new ServiceReplicaListener[0];
+            //return new ServiceReplicaListener[0];
+            return new[] { new ServiceReplicaListener(context => this.CreateServiceRemotingListener(context)) };
         }
 
-        public string GetHelloWorld()
+        public async Task<string> GetHelloWorld()
         {
-            return "Hello World";
+            return await Task.Run(() => { return "Hello World"; });
         }
 
         /// <summary>

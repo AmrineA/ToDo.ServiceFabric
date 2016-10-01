@@ -1,5 +1,6 @@
 ﻿using Microsoft.ServiceFabric.Services.Remoting.Client;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using ToDo.Domain;
 
@@ -9,9 +10,9 @@ namespace ToDo.WebAPI.Controllers
     public class ValuesController : ApiController
     {
         // GET api/values 
-        public string Get()
+        public Task<string> Get()
         {
-            IToDoService service = ServiceProxy.Create<IToDoService>(new System.Uri("fabric:/ToDo.ServiceFabric/ToDo.Microservice"));
+            IToDoService service = ServiceProxy.Create<IToDoService>(new System.Uri("fabric:/ToDo.ServiceFabric/Microservice"));
             return service.GetHelloWorld();
         }
 
