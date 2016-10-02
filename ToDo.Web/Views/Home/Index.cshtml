@@ -1,0 +1,59 @@
+﻿@using ToDo.Web.Models
+@model IEnumerable<ToDoItem>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ToDo Manager</h1>
+    <p class="lead">Manage the team's ToDo's in the list below.</p>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Effort)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.RealisticEffort)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Completed)
+        </th>
+
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Effort)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.RealisticEffort)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Completed)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", "ToDo", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "ToDo", new { id = item.Id }, null)
+            </td>
+        </tr>
+     }
+
+</table>

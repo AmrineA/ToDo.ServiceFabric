@@ -116,7 +116,7 @@ namespace ToDo.Microservice
                     internalItem.Value.Name = item.Name;
 
                     await toDoDictionary.SetAsync(tx, item.Id, internalItem.Value);
-
+                    await tx.CommitAsync();
                     ServiceEventSource.Current.ServiceMessage(this, "Update to do item: {0}", item.Id);
 
                     return true;
