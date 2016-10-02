@@ -200,6 +200,8 @@
     <Content Include="Views\ToDo\Edit.cshtml" />
     <Content Include="Views\ToDo\Create.cshtml" />
     <Content Include="Views\ToDo\Delete.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\BadRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

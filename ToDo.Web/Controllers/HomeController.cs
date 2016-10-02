@@ -11,6 +11,7 @@ using ToDo.Web.Models;
 
 namespace ToDo.Web.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         public async Task<ActionResult> Index()

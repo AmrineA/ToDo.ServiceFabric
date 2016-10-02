@@ -13,5 +13,15 @@ namespace ToDo.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult NotFound()
+        {
+            return View();
+        }
+
+        public ActionResult BadRequest()
+        {
+            return View();
+        }
     }
 }

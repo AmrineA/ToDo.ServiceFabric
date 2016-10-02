@@ -11,19 +11,21 @@ using ToDo.Web.Models;
 
 namespace ToDo.Web.Controllers
 {
+    [HandleError]
     public class ToDoController : Controller
     {
         // GET: ToDo
-        public async Task<ActionResult> Edit(Guid? id)        {            if (id == null)            {                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            }
+        public async Task<ActionResult> Edit(Guid? id)        {            if (id == null)            {                return RedirectToAction("BadRequest", "Error");            }
             ToDoItem item = await ServiceLogic.GetAsync<ToDoItem>(ConfigurationManager.AppSettings["ServiceUrl"] + "/" + id.ToString());
 
-            if (item == null)            {                return HttpNotFound();            }
+            if (item == null)            {                return RedirectToAction("NotFound", "Error");            }
             return View(item);        }
 
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]        public async Task<ActionResult> EditPost(ToDoItem item)
-        {            if (item == null)            {                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            }
+        {            if (item == null)            {
+                return RedirectToAction("BadRequest", "Error");            }
 
             try
             {
@@ -39,7 +41,7 @@ namespace ToDo.Web.Controllers
             }
             catch
             {
-                return RedirectToAction("Error");
+                return RedirectToAction("Index", "Error");
             }
         }
 
@@ -62,26 +64,28 @@ namespace ToDo.Web.Controllers
             }
             catch
             {
-                return RedirectToAction("Error");
+                return RedirectToAction("Index", "Error");
             }
             return View(item);
         }
 
         public async Task<ActionResult> Delete(Guid? id)
-        {            if (id == null)            {                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            }
+        {            if (id == null)            {
+                return RedirectToAction("BadRequest", "Error");            }
 
             ToDoItem item = await ServiceLogic.GetAsync<ToDoItem>(ConfigurationManager.AppSettings["ServiceUrl"] + "/" + id.ToString());
 
             if (item == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Error");
             }
             return View(item);
         }
         [HttpPost, ActionName("Delete")]        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid? id)
         {
-            if (id == null)            {                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            }
+            if (id == null)            {
+                return RedirectToAction("BadRequest", "Error");            }
 
             await ServiceLogic.DeleteAsync<ToDoItem>(ConfigurationManager.AppSettings["ServiceUrl"] + "/" + id.ToString());
             return RedirectToAction("Index", "Home");
